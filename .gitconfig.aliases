@@ -12,41 +12,24 @@
 #
 [alias]
     ################################
-    # Baseline addes from earlier times
+    # Shorthands
     ################################
+    b = branch
     st = status
-    ca = !git add -A && git commit
+    co = checkout
     last = log -1 HEAD
     # displays branch name
     bn = rev-parse --abbrev-ref HEAD
-    sf = flow feature start
-    ss = "!f() { git checkout -b story/$1;}; f"
-    pf = flow feature publish
-    ps = "!f() { git push -u origin $(git rev-parse --abbrev-ref HEAD);}; f"
-    cof = "!f() { git checkout feature/$1;}; f"
-    cos = "!f() { git checkout story/$1;}; f"
-    cod = !git checkout develop && git pull
-    b = branch
-    md = merge origin/develop
-    lb = "!f() { git log ${1-$(git rev-parse --abbrev-ref HEAD)} --name-status --not $(git for-each-ref --format='%(refname)' refs/heads/ | grep -v ""refs/heads/${1-$(git rev-parse --abbrev-ref HEAD)}""); }; f"
-    caf = "!f() { git add -A && git commit -m \"$(echo \"#$(git rev-parse --abbrev-ref HEAD)\" | sed 's/feature\\///g') $1\"; }; f"
-    cas = "!f() { git add -A && git commit -m \"$(echo \"#$(git rev-parse --abbrev-ref HEAD)\" | sed 's/story\\///g') $1\"; }; f"
-    undo = reset --soft HEAD~1
-    daf = "!git co develop && git branch --merged develop | egrep -v \"develop|master\" | xargs -n 1 git branch -d"
-    df = "!f() { git co develop && git branch -d feature/$1; }; f"
-    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git undo
-    cf = "!f() { git commit -m \"$(echo \"#$(git rev-parse --abbrev-ref HEAD)\" | sed 's/feature\\///g') $1\"; }; f"
-    cowc = !git checkout src/Application/Website/Web.config
-    coac = !git checkout src/Application/WindowsService/App.config
-    co = checkout
-    mf = "!f() { git merge feature/$1;}; f"
-    # these commands will tell git to ignore changes to the file (ig) or do not ignore changes (ug)
-    # very good for web.config changes
-    ig = "!f() { git update-index --assume-unchanged $1; }; f"
-    ug = "!f() { git update-index --no-assume-unchanged $1; }; f"
-    mc = !git add . && git commit
-    dasf = "!f() { git co feature/$1 && git pull && git branch --merged feature/$1 | egrep -v \"develop|master|$1\" | xargs -n 1 git branch -d; }; f"
-    #####
-    #
-    #####
-    
+    ################################
+    # Verify Workflow Commands
+    ################################
+    svs = "!f() { git checkout -b story/VERIFY-$1;}; f"   
+    svf = "!f() { git checkout -b feature/VERIFY-$1;}; f"  
+    pb = "!f() { git push -u origin $(git rev-parse --abbrev-ref HEAD);}; f"
+    covf = "!f() { git checkout feature/VERIFY-$1;}; f"
+    covs = "!f() { git checkout story/VERIFY-$1;}; f"
+    # gets case-normalized VERIFY ticket id from branch
+    jiravn = "!f() { git rev-parse --abbrev-ref HEAD |  sed "s/feature.\|story.//I" |  grep -o -Ei "(VERIFY)+-[0-9]+" | sed -e 's/\(.*\)/\U\1/'; }; f"
+    cm = "!f() { git commit -m \"${1-SAVEPOINT}\"; }; f"  
+    cvm = "!f() { jiraid=$(git jiravn); git cm \"$jiravn: ${1-SAVEPOINT}\"; }; f" 
+    ################################ 
