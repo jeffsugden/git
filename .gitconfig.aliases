@@ -10,6 +10,7 @@
 # 
 #   git config --global include.path ~/.gitconfig.aliases
 #
+
 [alias]
     ################################
     # Shorthands
@@ -33,3 +34,9 @@
     cm = "!f() { git commit -m \"${1-SAVEPOINT}\"; }; f"  
     cvm = "!f() { jiraid=$(git jiravn); git cm \"$jiravn: ${1-SAVEPOINT}\"; }; f" 
     ################################ 
+    # JIRA Workflow Commands
+    #################################
+    
+    
+    
+    
