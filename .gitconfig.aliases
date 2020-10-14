@@ -34,9 +34,12 @@
     cm = "!f() { git commit -m \"${1-SAVEPOINT}\"; }; f"  
     cvm = "!f() { jiraid=$(git jiravn); git cm \"$jiravn: ${1-SAVEPOINT}\"; }; f" 
     ################################ 
-    # JIRA Workflow Commands
+    # JIRA/Github Workflow Commands
     #################################
-    
+    jira-task = "!f() { echo \"not implemented"\; }; f"   # $1 = title, $2 = details
+    jira-story = "!f() { echo \"not implemented"\; }; f"  # $1 = title, $2 = details
+    jira-toreview = "!f() { echo \"not implemented"\; }; f"  # $1 = title, $2 = details
+    open-pr =
     
     
     
