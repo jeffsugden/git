@@ -29,17 +29,18 @@
     pnb = "!f() { git push -u origin $(git rev-parse --abbrev-ref HEAD);}; f"
     covf = "!f() { git checkout feature/VERIFY-$1;}; f"
     covs = "!f() { git checkout story/VERIFY-$1;}; f"
+    cm = "!f() { git commit -m \"${1-SAVEPOINT}\"; }; f" 
     # gets case-normalized VERIFY ticket id from branch
-    jiravn = "!f() { git rev-parse --abbrev-ref HEAD |  sed "s/feature.\|story.//I" |  grep -o -Ei "(VERIFY)+-[0-9]+" | sed -e 's/\(.*\)/\U\1/'; }; f"
-    cm = "!f() { git commit -m \"${1-SAVEPOINT}\"; }; f"  
-    cvm = "!f() { jiraid=$(git jiravn); git cm \"$jiravn: ${1-SAVEPOINT}\"; }; f" 
+    jiran = "!f() { git rev-parse --abbrev-ref HEAD |  sed "^.*/([a-zA-Z]{1,}-[0-9]{1,}).*" | sed -e 's/\(.*\)/\U\1/'; }; f"     
+    cjm = "!f() { jiraid=$(git jiran); git cm \"$jiraid: ${1-SAVEPOINT}\"; }; f" 
     ################################ 
     # JIRA/Github Workflow Commands
     #################################
+    jira = '!f() { open https://jira.optelgroup.com/browse/$(git jiran); }; f'
     jira-task = "!f() { echo \"not implemented"\; }; f"   # $1 = title, $2 = details
     jira-story = "!f() { echo \"not implemented"\; }; f"  # $1 = title, $2 = details
     jira-toreview = "!f() { echo \"not implemented"\; }; f"  # $1 = title, $2 = details
-    open-pr =
+    open-pr = "!f() { echo \"not implemented"\; }; f"
     
     
     
