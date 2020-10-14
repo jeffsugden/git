@@ -26,7 +26,7 @@
     ################################
     svs = "!f() { git checkout -b story/VERIFY-$1;}; f"   
     svf = "!f() { git checkout -b feature/VERIFY-$1;}; f"  
-    pb = "!f() { git push -u origin $(git rev-parse --abbrev-ref HEAD);}; f"
+    pnb = "!f() { git push -u origin $(git rev-parse --abbrev-ref HEAD);}; f"
     covf = "!f() { git checkout feature/VERIFY-$1;}; f"
     covs = "!f() { git checkout story/VERIFY-$1;}; f"
     # gets case-normalized VERIFY ticket id from branch
